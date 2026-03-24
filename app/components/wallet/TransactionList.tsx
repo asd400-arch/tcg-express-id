@@ -1,6 +1,6 @@
 'use client';
 
-import { formatSGD } from '@/lib/paynow';
+import { formatCurrency } from '@/lib/locale/config';
 import type { WalletTransaction } from '@/types/wallet';
 
 const TX_CONFIG: Record<string, { icon: string; label: string; color: string }> = {
@@ -131,10 +131,10 @@ export default function TransactionList({ transactions }: Props) {
                       fontWeight: '700',
                       color: isCredit ? '#10b981' : '#ef4444',
                     }}>
-                      {isCredit ? '+' : '-'}{formatSGD(tx.amount)}
+                      {isCredit ? '+' : '-'}{formatCurrency(tx.amount, 'id')}
                     </div>
                     <div style={{ fontSize: '11px', color: '#cbd5e1', marginTop: '1px' }}>
-                      bal {formatSGD(tx.balance_after)}
+                      bal {formatCurrency(tx.balance_after, 'id')}
                     </div>
                   </div>
                 </div>

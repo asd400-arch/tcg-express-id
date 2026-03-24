@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import useMobile from '../useMobile';
 import { useWallet } from '@/lib/hooks/useWallet';
-import { formatSGD } from '@/lib/paynow';
+import { formatCurrency } from '@/lib/locale/config';
 import WalletBalanceCard from './WalletBalanceCard';
 import TransactionList from './TransactionList';
 import TopupModal from './TopupModal';
@@ -73,8 +73,8 @@ function WalletPageInner() {
   const { wallet, recent_transactions, pending_withdrawals, monthly_earned, monthly_spent, monthly_withdrawn } = data;
 
   const stats = [
-    { label: 'This Month Earned', value: formatSGD(monthly_earned), icon: '📈', color: '#10b981' },
-    { label: 'This Month Spent', value: formatSGD(monthly_spent), icon: '📉', color: '#ef4444' },
+    { label: 'This Month Earned', value: formatCurrency(monthly_earned, 'id'), icon: '📈', color: '#10b981' },
+    { label: 'This Month Spent', value: formatCurrency(monthly_spent, 'id'), icon: '📉', color: '#ef4444' },
     { label: 'Pending Withdrawals', value: pending_withdrawals.length.toString(), icon: '⏳', color: '#f59e0b' },
     { label: 'Wallet Status', value: wallet.status.charAt(0).toUpperCase() + wallet.status.slice(1), icon: wallet.status === 'active' ? '✅' : '⚠️', color: wallet.status === 'active' ? '#10b981' : '#f59e0b' },
   ];
@@ -146,7 +146,7 @@ function WalletPageInner() {
             }}>
               <div>
                 <div style={{ fontSize: '13px', fontWeight: '600', color: '#78350f' }}>
-                  {formatSGD(w.amount)} via {w.method === 'paynow' ? 'PayNow' : 'Bank Transfer'}
+                  {formatCurrency(w.amount, 'id')} via {w.method === 'paynow' ? 'GoPay' : 'Transfer Bank'}
                 </div>
                 <div style={{ fontSize: '11px', color: '#a16207' }}>
                   {new Date(w.created_at).toLocaleDateString('en-SG', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}

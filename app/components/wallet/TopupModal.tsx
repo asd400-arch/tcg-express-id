@@ -6,9 +6,11 @@ import useMobile from '../useMobile';
 import { useToast } from '../Toast';
 import { useTopup } from '@/lib/hooks/useWallet';
 import { WALLET_CONSTANTS } from '@/types/wallet';
-import { formatSGD } from '@/lib/paynow';
+import { formatCurrency } from '@/lib/locale/config';
 import type { TopupPaymentMethod } from '@/types/wallet';
 import type { PayNowQRData } from '@/types/wallet';
+
+const fmt = (v: number) => formatCurrency(v, 'id');
 
 interface Props {
   open: boolean;
@@ -17,16 +19,16 @@ interface Props {
   initialAmount?: string;
 }
 
-const QUICK_AMOUNTS = [20, 50, 100, 200, 500, 1000];
+const QUICK_AMOUNTS = [200000, 500000, 1000000, 2000000, 5000000, 10000000];
 
 const TOPUP_BONUSES: Record<number, { amount: number; label: string }> = {
-  500: { amount: 25, label: '+$25 bonus (5%)' },
-  1000: { amount: 75, label: '+$75 bonus (7.5%)' },
+  5000000: { amount: 250000, label: '+Rp250.000 bonus (5%)' },
+  10000000: { amount: 750000, label: '+Rp750.000 bonus (7.5%)' },
 };
 
 function getBonusForAmount(amt: number): { amount: number; label: string } | null {
-  if (amt >= 1000) return TOPUP_BONUSES[1000];
-  if (amt >= 500) return TOPUP_BONUSES[500];
+  if (amt >= 10000000) return TOPUP_BONUSES[10000000];
+  if (amt >= 5000000) return TOPUP_BONUSES[5000000];
   return null;
 }
 
@@ -83,7 +85,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
   const handleSubmit = async () => {
     const numAmount = Number(amount);
     if (!numAmount || numAmount < WALLET_CONSTANTS.MIN_TOPUP || numAmount > WALLET_CONSTANTS.MAX_TOPUP) {
-      toast.error(`Amount must be between ${formatSGD(WALLET_CONSTANTS.MIN_TOPUP)} and ${formatSGD(WALLET_CONSTANTS.MAX_TOPUP)}`);
+      toast.error(`Amount must be between ${fmt(WALLET_CONSTANTS.MIN_TOPUP)} and ${fmt(WALLET_CONSTANTS.MAX_TOPUP)}`);
       return;
     }
 
@@ -167,7 +169,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
                       position: 'relative',
                     }}
                   >
-                    {formatSGD(a)}
+                    {fmt(a)}
                     {bonus && (
                       <span style={{
                         display: 'block',
@@ -195,7 +197,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
                 fontSize: '16px',
                 fontWeight: '700',
                 color: '#64748b',
-              }}>$</span>
+              }}>Rp</span>
               <input
                 type="number"
                 value={amount}
@@ -238,10 +240,10 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
                   fontFamily: "'Inter', sans-serif",
                 }}
               >
-                <span style={{ fontSize: '24px' }}>🇸🇬</span>
+                <span style={{ fontSize: '24px' }}>🇮🇩</span>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>PayNow</div>
-                  <div style={{ fontSize: '12px', color: '#64748b' }}>Scan QR with banking app</div>
+                  <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>GoPay / Transfer Bank</div>
+                  <div style={{ fontSize: '12px', color: '#64748b' }}>Transfer via GoPay atau Bank</div>
                 </div>
                 <span style={{
                   fontSize: '11px',
@@ -296,7 +298,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
                     Bonus Credit! {getBonusForAmount(Number(amount))!.label}
                   </div>
                   <div style={{ fontSize: '12px', color: '#047857' }}>
-                    You'll receive {formatSGD(Number(amount) + getBonusForAmount(Number(amount))!.amount)} total
+                    You'll receive {fmt(Number(amount) + getBonusForAmount(Number(amount))!.amount)} total
                   </div>
                 </div>
               </div>
@@ -320,7 +322,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
               }}
             >
               {loading ? 'Processing...' : amount
-                ? `Top Up ${formatSGD(Number(amount))}${getBonusForAmount(Number(amount)) ? ' + ' + getBonusForAmount(Number(amount))!.label : ''}`
+                ? `Top Up ${fmt(Number(amount))}${getBonusForAmount(Number(amount)) ? ' + ' + getBonusForAmount(Number(amount))!.label : ''}`
                 : 'Enter Amount'}
             </button>
           </>
@@ -334,7 +336,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
               <div style={{ marginBottom: '20px' }}>
                 <img
                   src={qrImage}
-                  alt="PayNow QR"
+                  alt="Payment QR"
                   style={{ width: '280px', height: '280px', margin: '0 auto', borderRadius: '16px' }}
                 />
               </div>
@@ -342,7 +344,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
 
             {/* Amount */}
             <div style={{ fontSize: '28px', fontWeight: '800', color: '#1e293b', marginBottom: '4px' }}>
-              {formatSGD(qrData.amount)}
+              {fmt(qrData.amount)}
             </div>
 
             {/* Timer */}
@@ -387,11 +389,11 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
             }}>
               <div style={{ fontSize: '13px', fontWeight: '700', color: '#7c3aed', marginBottom: '8px' }}>How to pay</div>
               <div style={{ fontSize: '12px', color: '#6b21a8', lineHeight: '1.6' }}>
-                1. Open your banking app (DBS, OCBC, UOB, etc.)<br />
-                2. Tap on PayNow / Scan &amp; Pay<br />
-                3. Scan this QR code<br />
-                4. Verify the amount and confirm payment<br />
-                5. Your wallet will be credited after verification
+                1. Buka aplikasi GoPay atau Mobile Banking<br />
+                2. Pilih Transfer atau Scan QR<br />
+                3. Scan kode QR ini<br />
+                4. Periksa jumlah dan konfirmasi pembayaran<br />
+                5. Saldo akan ditambahkan setelah verifikasi
               </div>
             </div>
 
@@ -431,7 +433,7 @@ export default function TopupModal({ open, onClose, onSuccess, initialAmount }: 
             }}>✓</div>
             <div style={{ fontSize: '20px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Top Up Successful!</div>
             <div style={{ fontSize: '14px', color: '#64748b', marginBottom: '24px' }}>
-              {formatSGD(Number(amount))} has been added to your wallet
+              {fmt(Number(amount))} has been added to your wallet
               {getBonusForAmount(Number(amount)) && (
                 <div style={{ color: '#10b981', fontWeight: '600', marginTop: '4px' }}>
                   🎁 {getBonusForAmount(Number(amount))!.label} will be credited shortly

@@ -5,7 +5,7 @@ import useMobile from '../useMobile';
 import { useToast } from '../Toast';
 import { useWithdrawal } from '@/lib/hooks/useWallet';
 import { WALLET_CONSTANTS } from '@/types/wallet';
-import { formatSGD } from '@/lib/paynow';
+import { formatCurrency } from '@/lib/locale/config';
 import type { Wallet } from '@/types/wallet';
 import type { WithdrawalMethod } from '@/types/wallet';
 
@@ -16,7 +16,7 @@ interface Props {
   wallet: Wallet;
 }
 
-const QUICK_AMOUNTS = [50, 100, 200, 500];
+const QUICK_AMOUNTS = [500000, 1000000, 2000000, 5000000];
 
 export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Props) {
   const m = useMobile();
@@ -48,7 +48,7 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
   const handleContinue = () => {
     const num = Number(amount);
     if (!num || num < WALLET_CONSTANTS.MIN_WITHDRAWAL) {
-      toast.error(`Minimum withdrawal is ${formatSGD(WALLET_CONSTANTS.MIN_WITHDRAWAL)}`);
+      toast.error(`Minimum withdrawal is ${formatCurrency(WALLET_CONSTANTS.MIN_WITHDRAWAL, 'id')}`);
       return;
     }
     if (num > wallet.balance) {
@@ -56,11 +56,11 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
       return;
     }
     if (num > WALLET_CONSTANTS.MAX_WITHDRAWAL) {
-      toast.error(`Maximum withdrawal is ${formatSGD(WALLET_CONSTANTS.MAX_WITHDRAWAL)}`);
+      toast.error(`Maximum withdrawal is ${formatCurrency(WALLET_CONSTANTS.MAX_WITHDRAWAL, 'id')}`);
       return;
     }
     if (method === 'paynow' && !hasPaynow) {
-      toast.error('Please set up your PayNow number in Settings first');
+      toast.error('Please set up your GoPay number in Settings first');
       return;
     }
     if (method === 'bank_transfer' && !hasBank) {
@@ -126,7 +126,7 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
               alignItems: 'center',
             }}>
               <span style={{ fontSize: '13px', color: '#64748b', fontWeight: '500' }}>Available Balance</span>
-              <span style={{ fontSize: '18px', fontWeight: '800', color: '#1e293b' }}>{formatSGD(wallet.balance)}</span>
+              <span style={{ fontSize: '18px', fontWeight: '800', color: '#1e293b' }}>{formatCurrency(wallet.balance, 'id')}</span>
             </div>
 
             {/* Quick amounts */}
@@ -149,7 +149,7 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
                     fontFamily: "'Inter', sans-serif",
                   }}
                 >
-                  ${a}
+                  {formatCurrency(a, 'id')}
                 </button>
               ))}
               <button
@@ -176,7 +176,7 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
               <span style={{
                 position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)',
                 fontSize: '16px', fontWeight: '700', color: '#64748b',
-              }}>$</span>
+              }}>Rp</span>
               <input
                 type="number"
                 value={amount}
@@ -212,9 +212,9 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
                   cursor: 'pointer', textAlign: 'left', fontFamily: "'Inter', sans-serif",
                 }}
               >
-                <span style={{ fontSize: '24px' }}>🇸🇬</span>
+                <span style={{ fontSize: '24px' }}>🇮🇩</span>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>PayNow</div>
+                  <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>GoPay</div>
                   <div style={{ fontSize: '12px', color: '#64748b' }}>
                     {hasPaynow ? `•••• ${wallet.paynow_number!.slice(-4)}` : 'Not set up'}
                     {' · Free · 1-2 business days'}
@@ -242,13 +242,13 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
                   <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>Bank Transfer</div>
                   <div style={{ fontSize: '12px', color: '#64748b' }}>
                     {hasBank ? `${wallet.bank_name} •••• ${wallet.bank_account_number!.slice(-4)}` : 'Not set up'}
-                    {' · $0.50 fee · 1-3 business days'}
+                    {' · Rp5.000 fee · 1-3 business days'}
                   </div>
                 </div>
                 <span style={{
                   fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '6px',
                   background: '#fef3c7', color: '#92400e',
-                }}>$0.50</span>
+                }}>Rp5.000</span>
               </button>
             </div>
 
@@ -258,7 +258,7 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
                 padding: '12px 14px', background: '#fef3c7', borderRadius: '10px',
                 marginBottom: '20px', fontSize: '13px', color: '#92400e', fontWeight: '500',
               }}>
-                ⚠️ Please set up your {method === 'paynow' ? 'PayNow number' : 'bank account'} in Wallet Settings before withdrawing.
+                ⚠️ Please set up your {method === 'paynow' ? 'GoPay number' : 'bank account'} in Wallet Settings before withdrawing.
               </div>
             )}
 
@@ -288,22 +288,22 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '14px', color: '#64748b' }}>Withdrawal Amount</span>
-                <span style={{ fontSize: '14px', fontWeight: '700', color: '#1e293b' }}>{formatSGD(Number(amount))}</span>
+                <span style={{ fontSize: '14px', fontWeight: '700', color: '#1e293b' }}>{formatCurrency(Number(amount), 'id')}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '14px', color: '#64748b' }}>Processing Fee</span>
                 <span style={{ fontSize: '14px', fontWeight: '600', color: fee > 0 ? '#f59e0b' : '#10b981' }}>
-                  {fee > 0 ? formatSGD(fee) : 'Free'}
+                  {fee > 0 ? formatCurrency(fee, 'id') : 'Free'}
                 </span>
               </div>
               <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '14px', display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>You will receive</span>
-                <span style={{ fontSize: '18px', fontWeight: '800', color: '#10b981' }}>{formatSGD(netAmount)}</span>
+                <span style={{ fontSize: '18px', fontWeight: '800', color: '#10b981' }}>{formatCurrency(netAmount, 'id')}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '14px', color: '#64748b' }}>Method</span>
                 <span style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>
-                  {method === 'paynow' ? `PayNow (${wallet.paynow_number})` : `${wallet.bank_name} •••• ${wallet.bank_account_number?.slice(-4)}`}
+                  {method === 'paynow' ? `GoPay (${wallet.paynow_number})` : `${wallet.bank_name} •••• ${wallet.bank_account_number?.slice(-4)}`}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -354,7 +354,7 @@ export default function WithdrawalModal({ open, onClose, onSuccess, wallet }: Pr
               Withdrawal Requested!
             </div>
             <div style={{ fontSize: '14px', color: '#64748b', marginBottom: '8px' }}>
-              {formatSGD(netAmount)} will be sent to your {method === 'paynow' ? 'PayNow' : 'bank'} account
+              {formatCurrency(netAmount, 'id')} will be sent to your {method === 'paynow' ? 'GoPay' : 'bank'} account
             </div>
             <div style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '24px' }}>
               Estimated arrival: {method === 'paynow' ? '1-2' : '1-3'} business days

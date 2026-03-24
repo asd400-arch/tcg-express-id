@@ -51,7 +51,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
   const handleSave = async () => {
     if (tab === 'paynow') {
       if (!paynowNumber.trim()) {
-        toast.error('Please enter your PayNow number');
+        toast.error('Please enter your GoPay number');
         return;
       }
       const result = await updateSettings({
@@ -60,7 +60,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
         preferred_withdrawal: 'paynow',
       });
       if (result) {
-        toast.success('PayNow settings saved');
+        toast.success('GoPay settings saved');
         onSuccess();
         onClose();
       }
@@ -134,7 +134,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
                 boxShadow: tab === t ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
               }}
             >
-              {t === 'paynow' ? '🇸🇬 PayNow' : '🏦 Bank Account'}
+              {t === 'paynow' ? '🇮🇩 GoPay' : '🏦 Bank Account'}
             </button>
           ))}
         </div>
@@ -143,7 +143,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
         {tab === 'paynow' && (
           <>
             {/* Type selector */}
-            <label style={labelStyle}>PayNow Type</label>
+            <label style={labelStyle}>GoPay Type</label>
             <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
               {PAYNOW_TYPES.map((pt) => (
                 <button
@@ -164,7 +164,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
             </div>
 
             {/* Number input */}
-            <label style={labelStyle}>PayNow Number</label>
+            <label style={labelStyle}>GoPay Number</label>
             <input
               type="text"
               value={paynowNumber}
@@ -178,7 +178,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
               padding: '14px', background: '#faf5ff', borderRadius: '12px',
               marginBottom: '24px', fontSize: '13px', color: '#6b21a8', lineHeight: '1.5',
             }}>
-              💡 PayNow withdrawals are <strong>free</strong> and typically processed within 1-2 business days.
+              💡 GoPay withdrawals are <strong>free</strong> and typically processed within 1-2 business days.
             </div>
           </>
         )}
@@ -224,7 +224,7 @@ export default function WalletSettingsModal({ open, onClose, onSuccess, wallet }
               padding: '14px', background: '#eff6ff', borderRadius: '12px',
               marginBottom: '24px', fontSize: '13px', color: '#1e40af', lineHeight: '1.5',
             }}>
-              💡 Bank transfers have a <strong>$0.50 processing fee</strong> and take 1-3 business days.
+              💡 Bank transfers have a <strong>Rp5.000 processing fee</strong> and take 1-3 business days.
             </div>
           </>
         )}
