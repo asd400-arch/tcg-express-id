@@ -3,7 +3,7 @@ import { LIABILITY_CAPS } from '../../lib/terms-content';
 import { LIABILITY_CAPS_ID } from '../../lib/terms-content-id';
 import { formatCurrency } from '../../lib/locale/config';
 
-export default function LiabilityCapModal({ onClose, locale = 'sg' }) {
+export default function LiabilityCapModal({ onClose, locale = 'id' }) {
   const caps = locale === 'id' ? LIABILITY_CAPS_ID : LIABILITY_CAPS;
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>

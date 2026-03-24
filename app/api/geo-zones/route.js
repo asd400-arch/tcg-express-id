@@ -7,7 +7,7 @@ export async function GET(request) {
   try {
     const session = getSession(request);
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    const country = request.nextUrl.searchParams.get('country') || session.country || 'sg';
+    const country = request.nextUrl.searchParams.get('country') || session.country || 'id';
 
     const { data, error } = await supabaseAdmin
       .from('service_zones')

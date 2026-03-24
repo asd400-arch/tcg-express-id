@@ -6,7 +6,7 @@ import TermsModal from '../components/TermsModal';
 import LiabilityCapModal from '../components/LiabilityCapModal';
 import { VEHICLE_MODES } from '../../lib/fares';
 
-function SignupForm({ initialLocale = 'sg' }) {
+function SignupForm({ initialLocale = 'id' }) {
   const locale = initialLocale;
   const { signup } = useAuth();
   const router = useRouter();
@@ -482,7 +482,7 @@ function SignupForm({ initialLocale = 'sg' }) {
   );
 }
 
-export default function Signup({ initialLocale = 'sg' }) {
+export default function Signup({ initialLocale = 'id' }) {
   return (
     <Suspense>
       <SignupForm initialLocale={initialLocale} />

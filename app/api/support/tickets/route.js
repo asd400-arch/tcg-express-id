@@ -81,9 +81,9 @@ function getAiResponse(category, message) {
       track: "To track your delivery:\n1. Go to My Jobs\n2. Tap on your active job\n3. The live map shows your driver's location in real-time\n\nIf the tracking isn't updating, the driver may be in an area with poor signal.",
     },
     payment: {
-      default: "I can help with payment issues! Common solutions:\n\n1. **Check wallet balance** - Go to Wallet page to see your balance\n2. **Top up wallet** - Use PayNow or card to add funds\n3. **View transactions** - All payment history is in your Wallet page\n4. **Refunds** - Refunds are processed within 3-5 business days\n\nFor specific payment disputes, tap 'Connect to Agent' below.",
+      default: "I can help with payment issues! Common solutions:\n\n1. **Check wallet balance** - Go to Wallet page to see your balance\n2. **Top up wallet** - Transfer via GoPay, OVO, Dana, or bank transfer\n3. **View transactions** - All payment history is in your Wallet page\n4. **Refunds** - Refunds are processed within 3-5 business days\n\nFor specific payment disputes, tap 'Connect to Agent' below.",
       refund: "Refund information:\n- Cancelled jobs before pickup: Full refund to wallet\n- Cancelled after pickup: Partial refund based on policy\n- Disputed deliveries: Reviewed by admin within 24 hours\n\nRefunds are credited to your wallet balance. For bank refunds, please contact an agent.",
-      wallet: "Wallet help:\n- **Top up**: Go to Wallet > Top Up, choose amount, pay via PayNow\n- **Bonus**: Get bonus credits on larger top-ups ($100+)\n- **Points**: Earn 5% points on every completed delivery\n\nYour wallet balance is shown on your dashboard.",
+      wallet: "Wallet help:\n- **Top up**: Go to Wallet > Top Up, choose amount, pay via GoPay/OVO/Dana or transfer bank\n- **Bonus**: Get bonus credits on larger top-ups\n- **Points**: Earn 5% points on every completed delivery\n\nYour wallet balance is shown on your dashboard.",
     },
     account: {
       default: "Account help:\n\n1. **Update profile** - Go to Settings to change name, phone, etc.\n2. **Change password** - Settings > Change Password\n3. **KYC documents** - Drivers can upload/update KYC in Settings\n4. **Verification** - Admin reviews KYC within 24 hours\n\nFor account security issues, please tap 'Connect to Agent' below.",

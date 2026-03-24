@@ -16,7 +16,7 @@ export default function TermsPage() {
         <div style={{ background: 'white', borderRadius: '16px', padding: '32px', border: '1px solid #f1f5f9', marginTop: '20px' }}>
 
           <h2 style={h2}>1. Introduction</h2>
-          <p style={p}>Welcome to TCG Express, a B2B express delivery platform operated by Tech Chain Global Pte Ltd ("TCG", "we", "us", "our"), registered in Singapore. By accessing or using our platform at express.techchainglobal.com ("Platform"), you agree to be bound by these Terms of Service ("Terms").</p>
+          <p style={p}>Welcome to TCG Express, a B2B express delivery platform operated by Tech Chain Global Pte Ltd ("TCG", "we", "us", "our"), operating in Indonesia. By accessing or using our platform at express.techchainglobal.com ("Platform"), you agree to be bound by these Terms of Service ("Terms").</p>
 
           <h2 style={h2}>2. Definitions</h2>
           <p style={p}><strong>"Client"</strong> means a registered user who posts delivery jobs on the Platform.</p>
@@ -39,10 +39,10 @@ export default function TermsPage() {
           <h3 style={h3}>5.3 Payments</h3>
           <p style={p}>Payment is processed through the Platform Wallet. Clients must maintain sufficient Wallet balance before accepting a Bid. Upon Bid acceptance, the agreed amount is held in escrow. After successful delivery confirmation, funds are released to the Driver's Wallet, less the Platform commission of 15%.</p>
           <h3 style={h3}>5.4 Wallet Top-up</h3>
-          <p style={p}>Wallet top-ups via PayNow are subject to verification and manual approval by TCG. Top-up bonuses, where offered, are promotional credits and may be withdrawn or modified at TCG's discretion.</p>
+          <p style={p}>Wallet top-ups via bank transfer are subject to verification and manual approval by TCG. Top-up bonuses, where offered, are promotional credits and may be withdrawn or modified at TCG's discretion.</p>
 
           <h2 style={h2}>6. Driver Obligations</h2>
-          <p style={p}>Drivers must hold a valid Singapore driving licence appropriate for their registered vehicle type. Drivers are independent contractors, not employees of TCG. Drivers are responsible for maintaining valid insurance, vehicle roadworthiness, and compliance with all applicable traffic and transport regulations.</p>
+          <p style={p}>Drivers must hold a valid Indonesian driving licence (SIM) appropriate for their registered vehicle type. Drivers are independent contractors, not employees of TCG. Drivers are responsible for maintaining valid insurance, vehicle roadworthiness, and compliance with all applicable traffic and transport regulations.</p>
 
           <h2 style={h2}>7. Liability &amp; Disclaimers</h2>
           <h3 style={h3}>7.1 Limitation of Liability</h3>
@@ -65,7 +65,7 @@ export default function TermsPage() {
           <p style={p}>TCG reserves the right to modify these Terms at any time. Material changes will be notified via email or Platform notification. Continued use of the Platform after modifications constitutes acceptance of the updated Terms.</p>
 
           <h2 style={h2}>12. Governing Law</h2>
-          <p style={p}>These Terms are governed by and construed in accordance with the laws of the Republic of Singapore. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of Singapore.</p>
+          <p style={p}>These Terms are governed by and construed in accordance with the laws of the Republic of Indonesia. Any disputes arising from these Terms shall be subject to the jurisdiction of the courts of Indonesia.</p>
 
           <h2 style={h2}>13. Contact</h2>
           <p style={p}>For questions regarding these Terms, please contact us at:</p>

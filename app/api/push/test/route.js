@@ -75,7 +75,7 @@ export async function GET(request) {
     // Step 5: Send test push
     const results = await sendPushToUser(session.userId, {
       title: 'TCG Express Test',
-      body: `Push is working! ${new Date().toLocaleTimeString('en-SG', { timeZone: 'Asia/Singapore' })} SGT`,
+      body: `Push is working! ${new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta' })} WIB`,
       url: '/',
     });
 

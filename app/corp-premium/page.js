@@ -236,7 +236,7 @@ export default function CorpPremiumPage() {
               <div style={{ background: '#f8fafc', borderRadius: '10px', padding: '16px', marginBottom: '16px', maxHeight: '300px', overflow: 'auto', border: '1px solid #e2e8f0', fontSize: '13px', color: '#374151', lineHeight: '1.8' }}>
                 <p><strong>1. Confidentiality Obligations.</strong> TCG Express and the assigned transport partner(s) agree to treat all information related to pickup/delivery addresses, cargo descriptions, business operations, and client identity as strictly confidential.</p>
                 <p><strong>2. Non-Disclosure.</strong> No party shall disclose, publish, or disseminate any confidential information to any third party without prior written consent.</p>
-                <p><strong>3. Data Protection.</strong> All route data, customer data, and delivery logs are stored in compliance with PDPA (Personal Data Protection Act) and may not be exported, shared, or repurposed.</p>
+                <p><strong>3. Data Protection.</strong> All route data, customer data, and delivery logs are stored in compliance with UU PDP (Undang-Undang Perlindungan Data Pribadi) of Indonesia and may not be exported, shared, or repurposed.</p>
                 <p><strong>4. Duration.</strong> This NDA remains in effect for the duration of the contract and 2 years thereafter.</p>
                 <p><strong>5. Breach.</strong> Any breach of this NDA may result in immediate contract termination and legal proceedings.</p>
               </div>
@@ -293,7 +293,7 @@ export default function CorpPremiumPage() {
 
                 <p><strong>2. Confidentiality Obligations.</strong> TCG Express and the assigned transport partner(s) agree to: (a) treat all Confidential Information as strictly confidential; (b) not disclose, publish, or disseminate any Confidential Information to any third party without prior written consent from the Client; (c) use Confidential Information solely for the purpose of fulfilling delivery obligations under this agreement; (d) restrict access to Confidential Information to only those employees and agents who need to know for service delivery.</p>
 
-                <p><strong>3. Data Protection.</strong> All route data, customer data, delivery logs, and operational data are stored in compliance with the Personal Data Protection Act (PDPA) of Singapore. This data may not be exported, shared, repurposed, or used for any purpose other than the contracted delivery services. TCG Express implements industry-standard encryption and access controls to protect all data.</p>
+                <p><strong>3. Data Protection.</strong> All route data, customer data, delivery logs, and operational data are stored in compliance with the Undang-Undang Perlindungan Data Pribadi (UU PDP) of Indonesia. This data may not be exported, shared, repurposed, or used for any purpose other than the contracted delivery services. TCG Express implements industry-standard encryption and access controls to protect all data.</p>
 
                 <p><strong>4. Intellectual Property.</strong> No transfer of intellectual property rights is implied by this agreement. All proprietary systems, processes, and technologies used by either party remain the sole property of that party.</p>
 
@@ -307,9 +307,9 @@ export default function CorpPremiumPage() {
 
                 <p><strong>9. Indemnification.</strong> Each party agrees to indemnify and hold harmless the other party from any losses, damages, or claims arising from a breach of this NDA by the indemnifying party or its agents.</p>
 
-                <p><strong>10. Governing Law.</strong> This NDA shall be governed by and construed in accordance with the laws of the Republic of Singapore.</p>
+                <p><strong>10. Governing Law.</strong> This NDA shall be governed by and construed in accordance with the laws of the Republic of Indonesia.</p>
 
-                <p><strong>11. Dispute Resolution.</strong> Any dispute arising out of or in connection with this NDA shall first be submitted to mediation administered by the Singapore Mediation Centre. If mediation fails to resolve the dispute within thirty (30) days, either party may refer the matter to arbitration under the rules of the Singapore International Arbitration Centre (SIAC). The arbitration shall be conducted in English, and the decision of the arbitrator(s) shall be final and binding on both parties. Each party shall bear its own costs of mediation and arbitration, unless the arbitrator determines otherwise.</p>
+                <p><strong>11. Dispute Resolution.</strong> Any dispute arising out of or in connection with this NDA shall first be submitted to mediation. If mediation fails to resolve the dispute within thirty (30) days, either party may refer the matter to arbitration under the rules of the Badan Arbitrase Nasional Indonesia (BANI). The arbitration shall be conducted in Indonesian or English, and the decision of the arbitrator(s) shall be final and binding on both parties. Each party shall bear its own costs of mediation and arbitration, unless the arbitrator determines otherwise.</p>
 
                 <p style={{ marginTop: '16px', fontSize: '12px', color: '#94a3b8' }}>Last updated: February 2026 | TCG Express Pte Ltd</p>
               </div>

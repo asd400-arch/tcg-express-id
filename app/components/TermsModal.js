@@ -2,7 +2,7 @@
 import { TERMS_SECTIONS } from '../../lib/terms-content';
 import { TERMS_SECTIONS_ID } from '../../lib/terms-content-id';
 
-export default function TermsModal({ onClose, highlightSection, locale = 'sg' }) {
+export default function TermsModal({ onClose, highlightSection, locale = 'id' }) {
   const sections = locale === 'id' ? TERMS_SECTIONS_ID : TERMS_SECTIONS;
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>

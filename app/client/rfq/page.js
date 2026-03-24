@@ -493,7 +493,7 @@ export default function RFQPage() {
 
                 <p><strong>4. Permitted Disclosures.</strong> Confidential Information may be disclosed if: (a) required by law, regulation, or court order, provided the disclosing party gives prompt written notice where legally permitted; (b) the information becomes publicly available through no fault of the receiving party; (c) the information was independently developed without use of Confidential Information.</p>
 
-                <p><strong>5. Data Protection.</strong> All route data, customer data, delivery logs, and operational data are stored in compliance with the Personal Data Protection Act (PDPA) of Singapore. This data may not be exported, shared, repurposed, or used for any purpose other than the contracted delivery services. TCG Express implements industry-standard encryption and access controls to protect all data.</p>
+                <p><strong>5. Data Protection.</strong> All route data, customer data, delivery logs, and operational data are stored in compliance with the Undang-Undang Perlindungan Data Pribadi (UU PDP) of Indonesia. This data may not be exported, shared, repurposed, or used for any purpose other than the contracted delivery services. TCG Express implements industry-standard encryption and access controls to protect all data.</p>
 
                 <p><strong>6. Intellectual Property.</strong> No transfer of intellectual property rights is implied by this agreement. All proprietary systems, processes, and technologies used by either party remain the sole property of that party. RFQ submissions and attachments remain the intellectual property of the Client.</p>
 
@@ -501,9 +501,9 @@ export default function RFQPage() {
 
                 <p><strong>8. Indemnification.</strong> Each party agrees to indemnify and hold harmless the other party from any losses, damages, or claims arising from a breach of this NDA by the indemnifying party or its agents.</p>
 
-                <p><strong>9. Governing Law.</strong> This NDA shall be governed by and construed in accordance with the laws of the Republic of Singapore.</p>
+                <p><strong>9. Governing Law.</strong> This NDA shall be governed by and construed in accordance with the laws of the Republic of Indonesia.</p>
 
-                <p><strong>10. Dispute Resolution.</strong> Any dispute arising out of or in connection with this NDA shall first be submitted to mediation administered by the Singapore Mediation Centre. If mediation fails to resolve the dispute within thirty (30) days, either party may refer the matter to arbitration under the rules of the Singapore International Arbitration Centre (SIAC). The arbitration shall be conducted in English, and the decision of the arbitrator(s) shall be final and binding on both parties.</p>
+                <p><strong>10. Dispute Resolution.</strong> Any dispute arising out of or in connection with this NDA shall first be submitted to mediation. If mediation fails to resolve the dispute within thirty (30) days, either party may refer the matter to arbitration under the rules of the Badan Arbitrase Nasional Indonesia (BANI). The arbitration shall be conducted in Indonesian or English, and the decision of the arbitrator(s) shall be final and binding on both parties.</p>
 
                 <p><strong>11. Return of Information.</strong> Upon termination of the contract, TCG Express and its partners shall promptly return or destroy all Confidential Information and any copies thereof, and provide written confirmation of such destruction upon request.</p>
 

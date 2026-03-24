@@ -100,7 +100,7 @@ export default function AdminWalletPage() {
 
   const handleConfirm = async (topup) => {
     if (!refInput.trim()) {
-      showToast('PayNow reference is required', 'error');
+      showToast('Transfer reference is required', 'error');
       return;
     }
     setConfirmingId(topup.id);
@@ -112,7 +112,7 @@ export default function AdminWalletPage() {
       });
       const data = await res.json();
       if (res.ok) {
-        showToast(`${formatCurrency(topup.amount, topup.user?.locale || 'sg')} credited to ${topup.user?.contact_name || 'user'}`);
+        showToast(`${formatCurrency(topup.amount, topup.user?.locale || 'id')} credited to ${topup.user?.contact_name || 'user'}`);
         setShowConfirmModal(null);
         setRefInput('');
         fetchTopups();
@@ -126,7 +126,7 @@ export default function AdminWalletPage() {
   };
 
   const handleReject = async (topup) => {
-    if (!confirm(`Reject ${formatCurrency(topup.amount, topup.user?.locale || 'sg')} top-up from ${topup.user?.contact_name}?`)) return;
+    if (!confirm(`Reject ${formatCurrency(topup.amount, topup.user?.locale || 'id')} top-up from ${topup.user?.contact_name}?`)) return;
     setRejectingId(topup.id);
     try {
       await supabase
@@ -179,7 +179,7 @@ export default function AdminWalletPage() {
             💳 Wallet Top-ups
           </h1>
           <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>
-            Review and approve PayNow top-up requests
+            Review and approve top-up requests
           </p>
         </div>
 
@@ -191,7 +191,7 @@ export default function AdminWalletPage() {
           </div>
           <div style={{ ...card, borderLeft: '4px solid #3b82f6' }}>
             <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: '600' }}>Pending Amount</div>
-            <div style={{ fontSize: '28px', fontWeight: '800', color: '#3b82f6' }}>{formatCurrency(stats.totalPending, 'sg')}</div>
+            <div style={{ fontSize: '28px', fontWeight: '800', color: '#3b82f6' }}>{formatCurrency(stats.totalPending, 'id')}</div>
           </div>
           <div style={{ ...card, borderLeft: '4px solid #10b981' }}>
             <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: '600' }}>Approved Today</div>
@@ -270,10 +270,10 @@ export default function AdminWalletPage() {
                           </div>
                         </td>
                         <td style={{ padding: '12px', fontWeight: '700', fontSize: '15px', color: '#1e293b' }}>
-                          {formatCurrency(t.amount, t.user?.locale || 'sg')}
+                          {formatCurrency(t.amount, t.user?.locale || 'id')}
                         </td>
                         <td style={{ padding: '12px', color: '#64748b' }}>
-                          {t.payment_method === 'paynow' ? '🏦 PayNow' : t.payment_method || '—'}
+                          {t.payment_method === 'paynow' ? '🏦 Transfer Bank' : t.payment_method || '—'}
                         </td>
                         <td style={{ padding: '12px' }}>
                           <span style={{ fontSize: '12px', color: '#64748b', fontFamily: 'monospace' }}>
@@ -365,14 +365,14 @@ export default function AdminWalletPage() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748b', fontSize: '13px' }}>Amount</span>
                   <span style={{ fontWeight: '800', color: '#10b981', fontSize: '18px' }}>
-                    {formatCurrency(showConfirmModal.amount, showConfirmModal.user?.locale || 'sg')}
+                    {formatCurrency(showConfirmModal.amount, showConfirmModal.user?.locale || 'id')}
                   </span>
                 </div>
               </div>
 
               {/* Reference input */}
               <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#475569', marginBottom: '6px' }}>
-                PayNow Reference (from bank statement)
+                Transfer Reference (from bank statement)
               </label>
               <input
                 type="text"

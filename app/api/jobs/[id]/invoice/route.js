@@ -34,7 +34,7 @@ export async function POST(request, { params }) {
       driver = d;
     }
 
-    const clientLocale = job.client?.locale || 'sg';
+    const clientLocale = job.client?.locale || 'id';
     const localeConfig = getLocaleConfig(clientLocale);
     const dateLocale = clientLocale === 'id' ? 'id-ID' : 'en-SG';
 
