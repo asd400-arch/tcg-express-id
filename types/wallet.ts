@@ -239,31 +239,34 @@ export interface WalletOverview {
 // --- Constants ---
 
 export const WALLET_CONSTANTS = {
-  MIN_TOPUP: 10,
-  MAX_TOPUP: 10000,
-  MIN_WITHDRAWAL: 50,
-  MAX_WITHDRAWAL: 10000,
+  MIN_TOPUP: 10000,
+  MAX_TOPUP: 100000000,
+  MIN_WITHDRAWAL: 500000,
+  MAX_WITHDRAWAL: 100000000,
   PAYNOW_QR_EXPIRY_MINUTES: 30,
   WITHDRAWAL_PROCESSING_DAYS: { min: 1, max: 3 },
   PROCESSING_FEES: {
     paynow: 0,
-    bank_transfer: 0.50,
+    bank_transfer: 5000,
   },
-  TOPUP_AMOUNTS_QUICK: [20, 50, 100, 200, 500, 1000],
+  TOPUP_AMOUNTS_QUICK: [200000, 500000, 1000000, 2000000, 5000000, 10000000],
 } as const;
 
-// --- Singapore Banks ---
+// --- Indonesian Banks ---
 
 export const SG_BANKS = [
-  { code: 'DBS', name: 'DBS/POSB' },
-  { code: 'OCBC', name: 'OCBC Bank' },
-  { code: 'UOB', name: 'United Overseas Bank (UOB)' },
-  { code: 'SCB', name: 'Standard Chartered Bank' },
-  { code: 'CITI', name: 'Citibank' },
-  { code: 'HSBC', name: 'HSBC' },
-  { code: 'MBB', name: 'Maybank' },
-  { code: 'BOC', name: 'Bank of China' },
-  { code: 'ICBC', name: 'ICBC' },
+  { code: 'BCA', name: 'Bank Central Asia (BCA)' },
+  { code: 'BNI', name: 'Bank Negara Indonesia (BNI)' },
+  { code: 'BRI', name: 'Bank Rakyat Indonesia (BRI)' },
+  { code: 'MANDIRI', name: 'Bank Mandiri' },
+  { code: 'CIMB', name: 'CIMB Niaga' },
+  { code: 'DANAMON', name: 'Bank Danamon' },
+  { code: 'PERMATA', name: 'Bank Permata' },
+  { code: 'BTN', name: 'Bank Tabungan Negara (BTN)' },
+  { code: 'MEGA', name: 'Bank Mega' },
+  { code: 'BSI', name: 'Bank Syariah Indonesia (BSI)' },
+  { code: 'JAGO', name: 'Bank Jago' },
+  { code: 'SEA', name: 'SeaBank' },
 ] as const;
 
 export type SGBankCode = (typeof SG_BANKS)[number]['code'];

@@ -65,7 +65,7 @@ export async function POST(request) {
     if (jobIdCheck.error) return NextResponse.json({ error: jobIdCheck.error }, { status: 400 });
     const amountCheck = requirePositiveNumber(body.amount, 'Amount');
     if (amountCheck.error) return NextResponse.json({ error: amountCheck.error }, { status: 400 });
-    if (amountCheck.value > 100000) return NextResponse.json({ error: 'Amount exceeds maximum' }, { status: 400 });
+    if (amountCheck.value > 1000000000) return NextResponse.json({ error: 'Amount exceeds maximum' }, { status: 400 });
 
     const job_id = jobIdCheck.value;
     const amount = amountCheck.value;
@@ -81,8 +81,8 @@ export async function POST(request) {
         if (!item.name || typeof item.name !== 'string' || item.name.trim().length === 0) {
           return NextResponse.json({ error: 'Each equipment charge must have a name' }, { status: 400 });
         }
-        if (typeof item.amount !== 'number' || item.amount <= 0 || item.amount > 10000) {
-          return NextResponse.json({ error: 'Each equipment charge amount must be between $0 and $10,000' }, { status: 400 });
+        if (typeof item.amount !== 'number' || item.amount <= 0 || item.amount > 100000000) {
+          return NextResponse.json({ error: 'Each equipment charge amount must be between Rp 0 and Rp 100.000.000' }, { status: 400 });
         }
       }
       equipment_charges = body.equipment_charges.map(item => ({
@@ -172,7 +172,7 @@ export async function POST(request) {
             type: 'new_bid',
             category: 'bid_activity',
             title: 'New bid received',
-            message: `New bid $${parseFloat(amount).toFixed(2)} from ${driverName} on job ${job.job_number || ''}`,
+            message: `New bid Rp ${Math.round(parseFloat(amount)).toLocaleString('id-ID')} from ${driverName} on job ${job.job_number || ''}`,
             url: `/client/jobs/${job_id}`,
           });
         } catch {}
@@ -213,7 +213,7 @@ export async function POST(request) {
         type: 'new_bid',
         category: 'bid_activity',
         title: 'New bid received',
-        message: `New bid $${parseFloat(amount).toFixed(2)} from ${driverName} on job ${job.job_number || ''}`,
+        message: `New bid Rp ${Math.round(parseFloat(amount)).toLocaleString('id-ID')} from ${driverName} on job ${job.job_number || ''}`,
         url: `/client/jobs/${job_id}`,
       });
     } catch {}

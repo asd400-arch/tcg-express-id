@@ -185,7 +185,7 @@ export async function POST(request, { params }) {
       await notify(job.client_id, {
         type: 'job', category: 'bid_activity',
         title: `Driver accepted ${job.job_number} instantly!`,
-        message: `${driver?.contact_name || 'A driver'} accepted your job at $${bidAmount.toFixed(2)}. Payment processed from wallet.`,
+        message: `${driver?.contact_name || 'A driver'} accepted your job at Rp ${Math.round(bidAmount).toLocaleString('id-ID')}. Payment processed from wallet.`,
         referenceId: jobId,
       });
     } catch {}
