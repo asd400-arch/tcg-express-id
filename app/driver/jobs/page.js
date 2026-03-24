@@ -12,6 +12,7 @@ import { ADDON_OPTIONS, checkVehicleFit } from '../../../lib/fares';
 import { getAreaName, formatPickupTime, formatBudgetRange, getCountdown, getVehicleLabel, getJobBudget, sortByPickupUrgency } from '../../../lib/job-helpers';
 import JobCard from '../../components/JobCard';
 import useLocale from '../../components/useLocale';
+import { formatCurrency } from '../../../lib/locale/config';
 
 // Parse addons from special_requirements JSON
 function parseAddons(job) {
@@ -150,7 +151,7 @@ export default function DriverJobs() {
   const instantAccept = async (job) => {
     const maxBudget = getJobBudget(job);
     if (!maxBudget) { toast.error('Job has no valid budget'); return; }
-    if (!confirm(`Accept this job at $${maxBudget.toFixed(2)}? The client will be charged immediately from their wallet.`)) return;
+    if (!confirm(`Accept this job at ${formatCurrency(maxBudget, locale)}? The client will be charged immediately from their wallet.`)) return;
     setAccepting(job.id);
     try {
       const res = await fetch(`/api/jobs/${job.id}/instant-accept`, {
@@ -164,7 +165,7 @@ export default function DriverJobs() {
         setAccepting(null);
         return;
       }
-      toast.success(`Job accepted! You'll earn $${result.payout}`);
+      toast.success(`Job accepted! You'll earn ${formatCurrency(result.payout, locale)}`);
       setAccepting(null);
       loadData();
     } catch (e) {
@@ -221,7 +222,7 @@ export default function DriverJobs() {
                 )}
               </div>
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ fontSize: '13px', fontWeight: '600', color: '#374151', display: 'block', marginBottom: '6px' }}>Your Bid Amount ($)<span style={{ color: '#ef4444', marginLeft: '2px' }}>*</span></label>
+                <label style={{ fontSize: '13px', fontWeight: '600', color: '#374151', display: 'block', marginBottom: '6px' }}>Your Bid Amount (Rp)<span style={{ color: '#ef4444', marginLeft: '2px' }}>*</span></label>
                 <input type="number" style={{ ...input, border: bidErrors.bidAmount ? '1.5px solid #ef4444' : '1px solid #e2e8f0' }} value={bidAmount} onChange={e => { setBidAmount(e.target.value); setBidErrors(prev => { const n = { ...prev }; delete n.bidAmount; return n; }); }} placeholder="Enter amount" />
                 {bidErrors.bidAmount && <div style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px' }}>{bidErrors.bidAmount}</div>}
               </div>
@@ -235,9 +236,9 @@ export default function DriverJobs() {
                 <label style={{ fontSize: '13px', fontWeight: '600', color: '#374151', display: 'block', marginBottom: '8px' }}>Special Equipment (optional)</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '8px' }}>
                   {[
-                    { name: 'Pallet Jack', amount: 50 },
-                    { name: 'Lift Truck', amount: 80 },
-                    { name: 'Crane', amount: 150 },
+                    { name: 'Pallet Jack', amount: 500000 },
+                    { name: 'Lift Truck', amount: 800000 },
+                    { name: 'Crane', amount: 1500000 },
                   ].map(eq => {
                     const isSelected = equipmentCharges.some(e => e.name === eq.name);
                     return (
@@ -248,7 +249,7 @@ export default function DriverJobs() {
                           );
                         }} style={{ accentColor: '#10b981' }} />
                         <span style={{ fontSize: '13px', color: '#1e293b', flex: 1 }}>{eq.name}</span>
-                        <span style={{ fontSize: '13px', fontWeight: '700', color: '#059669' }}>${eq.amount}</span>
+                        <span style={{ fontSize: '13px', fontWeight: '700', color: '#059669' }}>{formatCurrency(eq.amount, locale)}</span>
                       </label>
                     );
                   })}
@@ -256,7 +257,7 @@ export default function DriverJobs() {
                     <div style={{ fontSize: '13px', color: '#64748b', marginBottom: '6px' }}>Other equipment</div>
                     <div style={{ display: 'flex', gap: '6px' }}>
                       <input type="text" placeholder="Name" value={customEquipName} onChange={e => setCustomEquipName(e.target.value)} style={{ ...input, flex: 2, padding: '8px 10px', fontSize: '13px' }} />
-                      <input type="number" placeholder="$" value={customEquipAmount} onChange={e => setCustomEquipAmount(e.target.value)} style={{ ...input, flex: 1, padding: '8px 10px', fontSize: '13px' }} />
+                      <input type="number" placeholder="Rp" value={customEquipAmount} onChange={e => setCustomEquipAmount(e.target.value)} style={{ ...input, flex: 1, padding: '8px 10px', fontSize: '13px' }} />
                       <button type="button" onClick={() => {
                         if (customEquipName.trim() && parseFloat(customEquipAmount) > 0) {
                           setEquipmentCharges(prev => [...prev, { name: customEquipName.trim(), amount: parseFloat(customEquipAmount) }]);
@@ -268,7 +269,7 @@ export default function DriverJobs() {
                   {equipmentCharges.filter(e => !['Pallet Jack', 'Lift Truck', 'Crane'].includes(e.name)).map((eq, i) => (
                     <div key={`custom-${i}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderRadius: '8px', background: '#f0fdf4', border: '1px solid #86efac' }}>
                       <span style={{ fontSize: '13px', color: '#1e293b', flex: 1 }}>{eq.name}</span>
-                      <span style={{ fontSize: '13px', fontWeight: '700', color: '#059669' }}>${eq.amount}</span>
+                      <span style={{ fontSize: '13px', fontWeight: '700', color: '#059669' }}>{formatCurrency(eq.amount, locale)}</span>
                       <span onClick={() => setEquipmentCharges(prev => prev.filter((_, idx) => idx !== prev.indexOf(eq)))} style={{ cursor: 'pointer', color: '#ef4444', fontSize: '14px' }}>✕</span>
                     </div>
                   ))}
@@ -277,15 +278,15 @@ export default function DriverJobs() {
                   <div style={{ padding: '10px 12px', borderRadius: '8px', background: '#fffbeb', border: '1px solid #fde68a', fontSize: '13px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                       <span style={{ color: '#64748b' }}>Bid</span>
-                      <span style={{ color: '#1e293b', fontWeight: '600' }}>${parseFloat(bidAmount).toFixed(2)}</span>
+                      <span style={{ color: '#1e293b', fontWeight: '600' }}>{formatCurrency(parseFloat(bidAmount), locale)}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                       <span style={{ color: '#64748b' }}>Equipment</span>
-                      <span style={{ color: '#1e293b', fontWeight: '600' }}>${equipmentCharges.reduce((s, e) => s + e.amount, 0).toFixed(2)}</span>
+                      <span style={{ color: '#1e293b', fontWeight: '600' }}>{formatCurrency(equipmentCharges.reduce((s, e) => s + e.amount, 0), locale)}</span>
                     </div>
                     <div style={{ borderTop: '1px solid #fde68a', paddingTop: '4px', display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ color: '#92400e', fontWeight: '700' }}>Total</span>
-                      <span style={{ color: '#92400e', fontWeight: '800' }}>${(parseFloat(bidAmount) + equipmentCharges.reduce((s, e) => s + e.amount, 0)).toFixed(2)}</span>
+                      <span style={{ color: '#92400e', fontWeight: '800' }}>{formatCurrency(parseFloat(bidAmount) + equipmentCharges.reduce((s, e) => s + e.amount, 0), locale)}</span>
                     </div>
                   </div>
                 )}
@@ -436,7 +437,7 @@ export default function DriverJobs() {
               {myBids[detailJob.id] ? (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ padding: '10px 18px', borderRadius: '8px', background: myBids[detailJob.id].status === 'accepted' ? '#f0fdf4' : myBids[detailJob.id].status === 'rejected' ? '#fef2f2' : '#f0fdf4', color: myBids[detailJob.id].status === 'accepted' ? '#10b981' : myBids[detailJob.id].status === 'rejected' ? '#ef4444' : '#10b981', fontSize: '14px', fontWeight: '600' }}>
-                    Bid: ${myBids[detailJob.id].amount} ({myBids[detailJob.id].status === 'outbid' ? 'another driver accepted' : myBids[detailJob.id].status})
+                    Bid: {formatCurrency(myBids[detailJob.id].amount, locale)} ({myBids[detailJob.id].status === 'outbid' ? 'another driver accepted' : myBids[detailJob.id].status})
                   </span>
                   {['rejected', 'outbid'].includes(myBids[detailJob.id].status) && (
                     <button onClick={() => setSelectedJob(detailJob)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid #f59e0b', background: 'white', color: '#f59e0b', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Re-bid</button>
@@ -444,7 +445,7 @@ export default function DriverJobs() {
                 </div>
               ) : (
                 <>
-                  {getJobBudget(detailJob) && <button onClick={() => instantAccept(detailJob)} disabled={accepting === detailJob.id} style={{ padding: '12px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: "'Inter', sans-serif", opacity: accepting === detailJob.id ? 0.7 : 1 }}>{accepting === detailJob.id ? 'Accepting...' : `Accept $${getJobBudget(detailJob).toFixed(2)}`}</button>}
+                  {getJobBudget(detailJob) && <button onClick={() => instantAccept(detailJob)} disabled={accepting === detailJob.id} style={{ padding: '12px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: "'Inter', sans-serif", opacity: accepting === detailJob.id ? 0.7 : 1 }}>{accepting === detailJob.id ? 'Accepting...' : `Accept ${formatCurrency(getJobBudget(detailJob), locale)}`}</button>}
                   <button onClick={() => setSelectedJob(detailJob)} style={{ padding: '12px 24px', borderRadius: '10px', border: '1px solid #3b82f6', background: 'white', color: '#3b82f6', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>{getJobBudget(detailJob) ? 'Bid Custom' : 'Place Bid'}</button>
                 </>
               )}

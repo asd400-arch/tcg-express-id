@@ -70,6 +70,7 @@ export async function POST(request) {
     setSessionCookie(response, token);
     return response;
   } catch (err) {
+    console.error('[LOGIN ERROR]', err?.message || err, err?.stack);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }

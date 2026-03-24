@@ -7,6 +7,7 @@ import Spinner from '../../components/Spinner';
 import { useToast } from '../../components/Toast';
 import useMobile from '../../components/useMobile';
 import { VEHICLE_MODES } from '../../../lib/fares';
+import { formatCurrency } from '../../../lib/locale/config';
 
 export default function DriverCorpPremium() {
   const { user, loading } = useAuth();
@@ -114,12 +115,12 @@ export default function DriverCorpPremium() {
                 <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b', marginBottom: '4px' }}>{bidModal.title}</div>
                 <div style={{ fontSize: '12px', color: '#64748b' }}>{bidModal.client?.company_name || 'Corporate Client'}</div>
                 {bidModal.estimated_budget > 0 && (
-                  <div style={{ fontSize: '13px', color: '#10b981', fontWeight: '700', marginTop: '6px' }}>Budget: ${parseFloat(bidModal.estimated_budget).toLocaleString()}</div>
+                  <div style={{ fontSize: '13px', color: '#10b981', fontWeight: '700', marginTop: '6px' }}>Budget: {formatCurrency(parseFloat(bidModal.estimated_budget), 'id')}</div>
                 )}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 <div>
-                  <label style={label}>Bid Amount ($) *</label>
+                  <label style={label}>Bid Amount (Rp) *</label>
                   <input type="number" style={input} value={bidForm.bid_amount} onChange={e => setBidForm(p => ({ ...p, bid_amount: e.target.value }))} placeholder="Total bid amount" />
                 </div>
                 <div>
@@ -152,7 +153,7 @@ export default function DriverCorpPremium() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', flexWrap: 'wrap', gap: '10px' }}>
                 <h1 style={{ fontSize: '22px', fontWeight: '700', color: '#1e293b', margin: 0 }}>{detailReq.title}</h1>
                 {detailReq.estimated_budget > 0 && (
-                  <div style={{ fontSize: '22px', fontWeight: '800', color: '#f59e0b' }}>${parseFloat(detailReq.estimated_budget).toLocaleString()}</div>
+                  <div style={{ fontSize: '22px', fontWeight: '800', color: '#f59e0b' }}>{formatCurrency(parseFloat(detailReq.estimated_budget), 'id')}</div>
                 )}
               </div>
             </div>
@@ -225,7 +226,7 @@ export default function DriverCorpPremium() {
               {myBids[detailReq.id] ? (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ padding: '10px 18px', borderRadius: '8px', background: myBids[detailReq.id].status === 'accepted' ? '#f0fdf4' : myBids[detailReq.id].status === 'rejected' ? '#fef2f2' : myBids[detailReq.id].status === 'shortlisted' ? '#fffbeb' : '#f0f9ff', color: myBids[detailReq.id].status === 'accepted' ? '#10b981' : myBids[detailReq.id].status === 'rejected' ? '#ef4444' : myBids[detailReq.id].status === 'shortlisted' ? '#d97706' : '#3b82f6', fontSize: '14px', fontWeight: '600' }}>
-                    Bid: ${parseFloat(myBids[detailReq.id].bid_amount).toLocaleString()} ({myBids[detailReq.id].status})
+                    Bid: {formatCurrency(parseFloat(myBids[detailReq.id].bid_amount), 'id')} ({myBids[detailReq.id].status})
                   </span>
                 </div>
               ) : (
@@ -262,7 +263,7 @@ export default function DriverCorpPremium() {
                           )}
                         </div>
                         {req.estimated_budget > 0 && (
-                          <div style={{ fontSize: '17px', fontWeight: '800', color: '#f59e0b', flexShrink: 0 }}>${parseFloat(req.estimated_budget).toLocaleString()}</div>
+                          <div style={{ fontSize: '17px', fontWeight: '800', color: '#f59e0b', flexShrink: 0 }}>{formatCurrency(parseFloat(req.estimated_budget), 'id')}</div>
                         )}
                       </div>
 
